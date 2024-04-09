@@ -11,6 +11,7 @@ import { motion } from "framer-motion"
 export default function AddTodo() {
     const dispatch = useAppDispatch()
     const [text, setText] = useState("")
+    
     const { register, handleSubmit, reset, formState: { errors } } = useForm<TodoSchemaType>({
         resolver: zodResolver(TodoSchema)
     })
@@ -19,26 +20,28 @@ export default function AddTodo() {
         dispatch(addTodo(text))
         reset()
     }
+
     return (
-        <form onSubmit={handleSubmit(addTodoHandler)} className="flex justify-between gap-[5rem] mb-16 w-[20rem] md:w-[37rem] h-[3.5rem] mx-auto relative">
+        <form onSubmit={handleSubmit(addTodoHandler)} className="relative flex justify-between gap-[2.8rem] mb-16 h-[3.5rem]">
             <input
-                className="w-full h-full p-3 rounded-xl placeholder:text-[1.3rem] text-[1.3rem] text-zinc-900 font-medium"
+                className="w-full h-full p-3 rounded-xl placeholder:text-[1.1rem] md:placeholder:text-[1.3rem] text-[1.2rem] text-zinc-900 font-medium"
                 id="task"
                 type="text"
-                placeholder="write your next task"
+                placeholder="Escribe tu siguiente tarea"
                 onChangeCapture={(e) => setText(e.currentTarget.value)}
                 maxLength={30}
                 {...register('task')}
             />
-            {errors.task ? <span className="text-red-700 absolute top-[4rem]">{errors.task.message}</span> : null}
-
+            {errors.task && <span className="text-red-700 absolute top-[4rem]">{errors.task.message}</span>}
             <motion.button
                 whileTap={{ scale: 1.5 }}
                 type="submit"
-                className="border 
-          border-white 
-          rounded-full
-          w-[4.4rem]"
+                className="
+                border 
+                border-white 
+                rounded-full
+                w-[4.4rem]
+                h-[4rem]"
             >
                 <Plus size={36} className="mx-auto bg-primary" />
             </motion.button>

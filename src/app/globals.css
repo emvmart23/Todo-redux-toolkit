@@ -9,6 +9,7 @@
 }
 
 body {
-  background-color: black;
+  background-color:#272727;
   color: azure;
+  height: 100vh;
 }

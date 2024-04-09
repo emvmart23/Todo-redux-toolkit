@@ -5,8 +5,10 @@ import {
 } from "@/tools/localStorage";
 import { createSlice } from "@reduxjs/toolkit";
 
+const todoItem = JSON.parse(getLocalStorage("todos_V1") as string);
+
 const initialState: Todos = {
-  todos: JSON.parse(getLocalStorage("todos_V1") as string) || [],
+  todos: todoItem !== "undefined" ? JSON.parse(getLocalStorage("todos_V1") as string) : []
 };
 
 export const TodosSlice = createSlice({
@@ -23,14 +25,19 @@ export const TodosSlice = createSlice({
     },
 
     completeTodo: (state, action) => {
-      const taskIndex = state.todos.findIndex((todo) => todo.task === action.payload)
-      state.todos[taskIndex].completed = true
-      localStorage.setItem("todo_v1", JSON.stringify(state.todos));
+      const taskIndex = state.todos.findIndex(
+        (todo) => todo.task === action.payload
+      );
+      state.todos[taskIndex].completed = true;
+      setLocalStorage("todo_v1", JSON.stringify(state.todos));
     },
 
     deleteTodo: (state, action) => {
-      const taskIndex = state.todos.findIndex((todo) => todo.task === action.payload);
+      const taskIndex = state.todos.findIndex(
+        (todo) => todo.task === action.payload
+      );
       state.todos.splice(taskIndex, 1);
+      removeLocalStorage("todo_v1");
     },
   },
 });

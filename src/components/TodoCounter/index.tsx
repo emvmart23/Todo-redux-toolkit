@@ -3,7 +3,7 @@ import { RootState } from "@/store/store"
 import { useSelector } from "react-redux"
 
 export default function TodoCounter() {
-const todos = useSelector((state: RootState) => state.todos.todos)
+  const todos = useSelector((state: RootState) => state.todos.todos)
   const completedTodos = todos.filter((todo) => !!todo.completed === true).length
   const totalTodos = todos.length
   return (

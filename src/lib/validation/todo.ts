@@ -5,4 +5,3 @@ export const TodoSchema = z.object({
 })
 
 export type TodoSchemaType = z.infer<typeof TodoSchema>
-
