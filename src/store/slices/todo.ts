@@ -5,10 +5,10 @@ import {
 } from "@/tools/localStorage";
 import { createSlice } from "@reduxjs/toolkit";
 
-const todoItem = JSON.parse(getLocalStorage("todos_V1") as string);
+const todoItem = getLocalStorage("todos_V1") as string
 
 const initialState: Todos = {
-  todos: todoItem !== "undefined" ? JSON.parse(getLocalStorage("todos_V1") as string) : []
+  todos: getLocalStorage("todos_V1") as string ? JSON.parse(getLocalStorage("todos_V1") as string) : []
 };
 
 export const TodosSlice = createSlice({
